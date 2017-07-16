@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: Storio
+  # Profiles configuration
+  profiles: [dev, prod]
+  profiles.active: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/storio
+    username: storio
+    password: storio
+    driver-class-name: org.postgresql.Driver
+    # Connection pool configuration
+
+    # The indication of whether objects will be validated before being borrowed from the pool. default: false
+    test-on-borrow: true
+    # Flag to remove abandoned connections if they exceed the removeAbandonedTimeout. default: false
+    remove-abandoned: true
+    # Timeout in seconds before an abandoned(in use) connection can be removed. default: 60
+    remove-abandoned-timeout: 300
+    # The SQL query that will be used to validate connections from this pool before returning them to the caller.
+    validation-query: SELECT 1
+    # avoid excess validation, only run validation at most at this frequency - time in milliseconds. default: 30
+    validation-interval: 60
+    # Flag to log stack traces for application code which abandoned a Connection. default: false
+    #log-abandoned: true
+    # The maximum number of connections that should be kept in the pool at all times. default 100
+    max-idle: 20
+  # Hibernate JPA configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      # Does not affect logging, use <logger name="org.hibernate.SQL" level="DEBUG" /> in logback-dev.xml
+      show_sql: false
